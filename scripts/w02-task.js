@@ -4,7 +4,11 @@
 
 /* Step 2 - Variables */
 let fullname = "John Vincent Rabang";
+<<<<<<< HEAD
 let currentYear = new Date().getFullYear();
+=======
+let currentYear = 2023;
+>>>>>>> 2557b2827946a00ddab748e8add4abd7c163c69e
 let profilePicture = "images/jv.png";
 
 /* Step 3 - Element Variables */
