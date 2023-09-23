@@ -4,8 +4,8 @@
 
 /* Step 2 - Variables */
 let fullname = "John Vincent Rabang";
-let currentYear = 2023
-let profilePicture = "images/jv.png"
+let currentYear = 2023;
+let profilePicture = "images/jv.png";
 
 /* Step 3 - Element Variables */
 const nameElement = document.getElementById('name');
@@ -14,10 +14,10 @@ const yearElement = document.querySelector('#year');
 var imageElement = document.querySelector('img');
 
 /* Step 4 - Adding Content */
-nameElement.innerHTML = `<strong>${fullname}</strong>`
-yearElement.textContent = currentYear
-imageElement.setAttribute('src', profilePicture)
-imageElement.setAttribute('alt', `Profile image of ${fullname}`)
+nameElement.innerHTML = `<strong>${fullname}</strong>`;
+yearElement.textContent = currentYear;
+imageElement.setAttribute('src', profilePicture);
+imageElement.setAttribute('alt', `Profile image of ${fullname}`);
 
 /* Step 5 - Array */
 let favoriteFood = ['Shrimp', 'Ramen', 'Kimchi', 'Avocado Ice Cream'];
