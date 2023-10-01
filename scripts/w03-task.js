@@ -52,7 +52,7 @@ document.querySelector('#divideNumbers').addEventListener('click', divideNumbers
 const currentDate = new Date();
 let currentYear;
 currentYear = currentDate.getFullYear();
-document.getElementById("year").value = currentYear;
+document.getElementById("year").textContent = currentYear;
 
 /* ARRAY METHODS - Functional Programming */
 /* Output Source Array */
