@@ -1,5 +1,5 @@
 // Defining the API key and URL
-const API_KEY = 'TXGWHOHIPVV1GPA0'; //Set demo for now as there is a daily limit for AlphaVantage actual key TXGWHOHIPVV1GPA0 to insert during publication
+const API_KEY = 'demo'; //Set demo for now as there is a daily limit for AlphaVantage actual key TXGWHOHIPVV1GPA0 to insert during publication
 const API_URL = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=';
 const DAILY_API_URL = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=';
 const OVERVIEW_URL = 'https://www.alphavantage.co/query?function=OVERVIEW&symbol=';
@@ -135,6 +135,7 @@ document.getElementById('fetchStockPrice').addEventListener('click', () => {
     fetchStockPrice(symbol);
     fetchHistoricalPrices(symbol);
     fetchFundamentalData(symbol);
+    alert('Due to current limitation in Free API, kindly enter your query in 1 min interval. Thanks!.');
   } else {
     alert('Please enter a valid stock symbol.');
   }
@@ -144,4 +145,22 @@ document.getElementById('fetchStockPrice').addEventListener('click', () => {
 document.getElementById('dateFilter').addEventListener('input', (event) => {
   const selectedDate = event.target.value;
   filterHistoricalPrices(selectedDate);
+});
+
+// Event listener for the "Reset Filter" button
+document.getElementById('resetFilter').addEventListener('click', () => {
+  const dateFilterInput = document.getElementById('dateFilter');
+  dateFilterInput.value = ''; // Clear the date filter input
+
+  // Show all historical data (reset any previous filtering)
+  const listItems = document.querySelectorAll('#historicalPriceList li');
+  listItems.forEach((item) => {
+    item.style.display = 'block';
+  });
+
+  // Remove the "No Available Data" message, if it exists
+  const noDataMessage = document.querySelector('.no-data-message');
+  if (noDataMessage) {
+    noDataMessage.remove();
+  }
 });
