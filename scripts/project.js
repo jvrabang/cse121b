@@ -1,7 +1,11 @@
+//Final Project in CSE121B
+//Author: JV Rabang 10/24/2023
+
+//Import ES Modules
 import {qs, alertMessage} from "./alert.js"
 
 // Defining the API key and URL
-const API_KEY = 'demo'; //Set demo for now as there is a daily limit for AlphaVantage actual key TXGWHOHIPVV1GPA0 to insert during publication
+const API_KEY = 'TXGWHOHIPVV1GPA0'; //Set to demo during testing as there is a daily limit for AlphaVantage actual key TXGWHOHIPVV1GPA0 to insert during publication
 const API_URL = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=';
 const DAILY_API_URL = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=';
 const OVERVIEW_URL = 'https://www.alphavantage.co/query?function=OVERVIEW&symbol=';
@@ -136,7 +140,7 @@ document.getElementById('fetchStockPrice').addEventListener('click', () => {
     fetchStockPrice(symbol);
     fetchHistoricalPrices(symbol);
     fetchFundamentalData(symbol);
-    alertMessage('Due to current limitation in Free API, kindly enter your query in 1 min interval. Thanks!.');
+    alertMessage('Due to current limitation in Free API, kindly enter your query in 1 min interval to ensure accurate results. Thanks!.');
   } else {
     alertMessage('Please enter a valid stock symbol.');
   }
