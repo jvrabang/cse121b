@@ -35,16 +35,20 @@
         </div>
         <hr>
         <div class="stockinfo">
-            <div id="fundamentalSymbol"></div>
-            <div id="fundamentalName"></div>
-            <div id="fundamentalIndustry"></div>
-            <div id="fundamentalMarketCap"></div>
-            <div id="fundamentalExchange"></div>
-            <div id="fundamental52WeekHigh"></div>
-            <div id="fundamental52WeekLow"></div>
-            <div id="fundamental50DayMovingAverage"></div>
-            <div id="fundamental200DayMovingAverage"></div>
-            <div id="fundamentalSharesOutstanding"></div>
+            <div id="column1">
+                <div id="fundamentalSymbol"></div>
+                <div id="fundamentalName"></div>
+                <div id="fundamentalIndustry"></div>
+                <div id="fundamentalMarketCap"></div>
+                <div id="fundamentalExchange"></div>
+            </div>
+            <div id="column2">
+                <div id="fundamental52WeekHigh"></div>
+                <div id="fundamental52WeekLow"></div>
+                <div id="fundamental50DayMovingAverage"></div>
+                <div id="fundamental200DayMovingAverage"></div>
+                <div id="fundamentalSharesOutstanding"></div>
+            </div>
         </div>
     </div>
     <div id="stockInfo">
@@ -62,6 +66,7 @@
         <button id="resetFilter">Remove Filter</button>
         <ul id="historicalPriceList"></ul>
     </div>
-    <script type="module" src="scripts/project.js"></script>
+    <script src="scripts/project.js" type="module"></script>
+    <script src="scripts/alert.js" type="module"></script>
 </body>
 </html>

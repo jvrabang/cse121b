@@ -1,3 +1,5 @@
+import {qs, alertMessage} from "./alert.js"
+
 // Defining the API key and URL
 const API_KEY = 'demo'; //Set demo for now as there is a daily limit for AlphaVantage actual key TXGWHOHIPVV1GPA0 to insert during publication
 const API_URL = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=';
@@ -35,7 +37,7 @@ const displayHistoricalPrices = () => {
   });
 };
 
-// Filter function txo display prices for a selected date
+// Filter function to display prices for a selected date
 const filterHistoricalPrices = (selectedDate) => {
     const historicalPriceList = document.getElementById('historicalPriceList');
     const listItems = historicalPriceList.getElementsByTagName('li');
@@ -87,7 +89,7 @@ const fetchStockPrice = async (symbol) => {
     const data = await response.json();
 
     if (data['Error Message']) {
-      alert('No data available for the entered stock symbol. Please enter a valid symbol.');
+      alertMessage('No data available for the entered stock symbol. Please enter a valid symbol.');
       return;
     }
 
@@ -102,10 +104,9 @@ const fetchStockPrice = async (symbol) => {
     stockInfoDiv.innerHTML += `<br><strong>Last Refreshed:</strong> ${lastRefreshed} ${timezone}`;
   } catch (error) {
     console.error('Error fetching stock price:', error);
-    alert('Error fetching stock price. Please try again later.');
+    alertMessage('Error fetching stock price. Please try again later.');
   }
 };
-
 
 // Function to fetch and display fundamental data
 const fetchFundamentalData = async (symbol) => {
@@ -135,9 +136,9 @@ document.getElementById('fetchStockPrice').addEventListener('click', () => {
     fetchStockPrice(symbol);
     fetchHistoricalPrices(symbol);
     fetchFundamentalData(symbol);
-    alert('Due to current limitation in Free API, kindly enter your query in 1 min interval. Thanks!.');
+    alertMessage('Due to current limitation in Free API, kindly enter your query in 1 min interval. Thanks!.');
   } else {
-    alert('Please enter a valid stock symbol.');
+    alertMessage('Please enter a valid stock symbol.');
   }
 });
 
