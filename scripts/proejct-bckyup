@@ -1,7 +1,7 @@
 // Defining the API key and URL
-const API_KEY = 'TXGWHOHIPVV1GPA0'; //Set demo for now as there is a daily limit for AlphaVantage actual key TXGWHOHIPVV1GPA0 to insert during publication
+const API_KEY = 'demo'; //Set demo for now as there is a daily limit for AlphaVantage actual key TXGWHOHIPVV1GPA0 to insert during publication
 const API_URL = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=';
-const DAILY_API_URL = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=';
+const DAILY_API_URL = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=';
 const OVERVIEW_URL = 'https://www.alphavantage.co/query?function=OVERVIEW&symbol=';
 
 // Store historical prices in an array
@@ -74,38 +74,18 @@ const filterHistoricalPrices = (selectedDate) => {
 // Function to fetch and display current stock price
 const fetchStockPrice = async (symbol) => {
   try {
-    // Clear the current stock price and historical price list
-    const stockInfoDiv = document.getElementById('stockInfo');
-    stockInfoDiv.innerHTML = '';
-    const historicalPriceList = document.getElementById('historicalPriceList');
-    historicalPriceList.innerHTML = '';
-
-    // Clear the historical prices array
-    historicalPrices.length = 0;
-
     const response = await fetch(`${API_URL}${symbol}&interval=5min&apikey=${API_KEY}`);
     const data = await response.json();
-
-    if (data['Error Message']) {
-      alert('No data available for the entered stock symbol. Please enter a valid symbol.');
-      return;
-    }
-
     const timeSeries = data['Time Series (5min)'];
     const latestData = timeSeries[Object.keys(timeSeries)[0]];
     const stockPrice = latestData['4. close'];
-    const lastRefreshed = data['Meta Data']['3. Last Refreshed'];
-    const timezone = data['Meta Data']['6. Time Zone'];
 
-    // Display the current stock price
+    const stockInfoDiv = document.getElementById('stockInfo');
     stockInfoDiv.innerHTML = `<strong>Current Stock Price:</strong> $${stockPrice}`;
-    stockInfoDiv.innerHTML += `<br><strong>Last Refreshed:</strong> ${lastRefreshed} ${timezone}`;
   } catch (error) {
     console.error('Error fetching stock price:', error);
-    alert('Error fetching stock price. Please try again later.');
   }
 };
-
 
 // Function to fetch and display fundamental data
 const fetchFundamentalData = async (symbol) => {
@@ -116,13 +96,9 @@ const fetchFundamentalData = async (symbol) => {
       document.getElementById('fundamentalSymbol').innerHTML = `<strong>Symbol:</strong> ${data['Symbol']}`;
       document.getElementById('fundamentalName').innerHTML = `<strong>Name:</strong> ${data['Name']}`;
       document.getElementById('fundamentalIndustry').innerHTML = `<strong>Industry:</strong> ${data['Industry']}`;
-      document.getElementById('fundamentalMarketCap').innerHTML = `<strong>Market Cap:</strong> $${Number(data['MarketCapitalization']).toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}`;
+      document.getElementById('fundamentalMarketCap').innerHTML = `<strong>Market Cap:</strong> ${data['MarketCapitalization']}`;
       document.getElementById('fundamentalExchange').innerHTML = `<strong>Exchange:</strong> ${data['Exchange']}`;
-      document.getElementById('fundamental52WeekHigh').innerHTML = `<strong>52 Week High:</strong> ${data['52WeekHigh']}`;
-      document.getElementById('fundamental52WeekLow').innerHTML = `<strong>52 Week Low:</strong> ${data['52WeekLow']}`;
-      document.getElementById('fundamental50DayMovingAverage').innerHTML = `<strong>50 Day Moving Average:</strong> ${data['50DayMovingAverage']}`;
-      document.getElementById('fundamental200DayMovingAverage').innerHTML = `<strong>200 Day Moving Average:</strong> ${data['200DayMovingAverage']}`;
-      document.getElementById('fundamentalSharesOutstanding').innerHTML = `<strong>Shares Outstanding:</strong> ${Number(data['SharesOutstanding']).toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}`;
+      // Add more fundamental data fields as needed
     } catch (error) {
       console.error('Error fetching fundamental data:', error);
     }
